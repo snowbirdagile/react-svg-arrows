@@ -13,6 +13,9 @@ type Props = {
   strokeWidth: number,
   arrowLabel?: ?React$Node,
   arrowMarkerId: string,
+  sourceId?: string,
+  targetId?: string,
+  onArrowClick?: any
 };
 
 function computeEndingArrowDirectionVector(endingAnchor) {
@@ -123,6 +126,9 @@ const SvgArrow = ({
   strokeWidth,
   arrowLabel,
   arrowMarkerId,
+  sourceId,
+  targetId,
+  onArrowClick
 }: Props) => {
   const actualArrowLength = arrowLength * 2;
 
@@ -189,7 +195,7 @@ const SvgArrow = ({
 
   const { xl, yl, wl, hl } = computeLabelDimensions(xs, ys, xe, ye);
   return (
-    <g className='sag'>
+    <g className='sag' onClick={() => onArrowClick(sourceId, targetId)}>
       <path
         d={pathString}
         style={{ fill: 'none', stroke: strokeColor, strokeWidth }}

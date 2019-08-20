@@ -15,6 +15,7 @@ type Props = {
   style?: Object,
   svgContainerStyle?: Object,
   className?: string,
+  onArrowClick?: any
 };
 
 type SourceToTargetsArrayType = Array<SourceToTargetType>;
@@ -261,10 +262,20 @@ export class ArrowContainer extends React.Component<Props, State> {
           strokeWidth={strokeWidth}
           arrowLabel={label}
           arrowThickness={arrowThickness}
+          sourceId={source.id}
+          targetId={target.id}
+          onArrowClick={this.handleArrowClick}
           arrowMarkerId={this.getMarkerId(source, target)}
         />
       );
     });
+  };
+
+  /**
+   *  Handles the svg arrow click
+   * */
+  handleArrowClick = (sourceId, targetId) => {
+    this.props.onArrowClick(sourceId, targetId);
   };
 
   /** Generates an id for an arrow marker
@@ -320,7 +331,6 @@ export class ArrowContainer extends React.Component<Props, State> {
 
   render() {
     const SvgArrows = this.computeArrows();
-    console.log("props 2", this.props);
     return (
       <ArrowContainerContextProvider
         value={{

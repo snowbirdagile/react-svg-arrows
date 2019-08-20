@@ -4,7 +4,7 @@
   "main": "lib/react-svg-arrows.js",
   "module": "lib/react-svg-arrows.js",
   "types": "types/react-svg-arrows.d.ts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "dependencies": {
     "react-fast-compare": "^2.0.4",
