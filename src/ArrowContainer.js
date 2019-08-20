@@ -275,7 +275,9 @@ export class ArrowContainer extends React.Component<Props, State> {
    *  Handles the svg arrow click
    * */
   handleArrowClick = (sourceId: string, targetId: string) => {
-    this.props.onArrowClick(sourceId, targetId);
+    if(this.props.onArrowClick) {
+      this.props.onArrowClick(sourceId, targetId);
+    }
   };
 
   /** Generates an id for an arrow marker
