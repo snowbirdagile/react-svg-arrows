@@ -116,6 +116,13 @@ export function computeLabelDimensions(
   };
 }
 
+export function handleClick(sourceId: string, targetId: string, onArrowClick: Function) {
+  if(onArrowClick) {
+    onArrowClick(sourceId, targetId);
+  }
+}
+
+
 const SvgArrow = ({
   startingPoint,
   startingAnchor,
@@ -195,7 +202,7 @@ const SvgArrow = ({
 
   const { xl, yl, wl, hl } = computeLabelDimensions(xs, ys, xe, ye);
   return (
-    <g className='sag' onClick={() => onArrowClick(sourceId, targetId)} style={{"cursor": "pointer"}}>
+    <g className='sag' onClick={() => handleClick(sourceId, targetId, onArrowClick)} style={{"cursor": "pointer"}}>
       <path
         d={pathString}
         style={{ fill: 'none', stroke: strokeColor, strokeWidth }}
