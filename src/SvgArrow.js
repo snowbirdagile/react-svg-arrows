@@ -195,7 +195,7 @@ const SvgArrow = ({
 
   const { xl, yl, wl, hl } = computeLabelDimensions(xs, ys, xe, ye);
   return (
-    <g className='sag' onClick={() => onArrowClick(sourceId, targetId)}>
+    <g className='sag' onClick={() => onArrowClick(sourceId, targetId)} style={{"cursor": "pointer"}}>
       <path
         d={pathString}
         style={{ fill: 'none', stroke: strokeColor, strokeWidth }}

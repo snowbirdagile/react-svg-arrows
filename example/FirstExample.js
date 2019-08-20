@@ -14,7 +14,8 @@ class FirstExample extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            scrolled: false
+            scrolled: false,
+            data
         }
     }
 
@@ -37,9 +38,39 @@ class FirstExample extends Component {
         });
     }
 
+    handleArrowClick = (sourceId, targetId) => {
+        let sourceCard;
+        let targetCard;
+        console.log(`source id ${sourceId} target id ${targetId}`);
+        const newData = this.state.data;
+        newData.forEach((lane) => {
+             lane.cards.forEach(card => {
+                 if(card.id === sourceId) {
+                   sourceCard = card
+                 }
+                 if(card.id === targetId) {
+                     targetCard = card
+                 }
+             });
+        });
+        const sourceRelationIndex = sourceCard.relations.findIndex((relation) => relation.targetId === targetId);
+        sourceCard.relations.splice(sourceRelationIndex,1);
+        targetCard.relations.push({
+            targetId: sourceId ,
+            targetAnchor: 'right',
+            sourceAnchor: 'right',
+
+        });
+        console.log("new data", newData)
+        this.state = {
+            data: newData
+        }
+        this.setState({ ...this.state });
+    };
+
 
      renderLanes() {
-        return data.map((lane) => {
+        return this.state.data.map((lane) => {
             return (
                 <div key={lane.id} style={style} id={lane.id}>
                     <h1>{lane.name}</h1>
@@ -69,9 +100,10 @@ class FirstExample extends Component {
     }
 
     render() {
+         debugger
         return (
             <div style={{height: '600px', margin: '50px'}} >
-                <ArrowContainer strokeColor="red" >
+                <ArrowContainer strokeColor="red" onArrowClick={this.handleArrowClick}>
                     <div style={{display: 'flex', justifyContent: 'space-around'}} id='parent'>
                         {this.renderLanes()}
                     </div>
