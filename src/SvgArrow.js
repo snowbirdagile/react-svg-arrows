@@ -15,7 +15,7 @@ type Props = {
   arrowMarkerId: string,
   sourceId?: string,
   targetId?: string,
-  onArrowClick?: any
+  onArrowClick?: Function
 };
 
 function computeEndingArrowDirectionVector(endingAnchor) {

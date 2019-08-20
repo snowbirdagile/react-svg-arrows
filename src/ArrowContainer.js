@@ -15,7 +15,7 @@ type Props = {
   style?: Object,
   svgContainerStyle?: Object,
   className?: string,
-  onArrowClick?: any
+  onArrowClick?: Function
 };
 
 type SourceToTargetsArrayType = Array<SourceToTargetType>;
@@ -274,7 +274,7 @@ export class ArrowContainer extends React.Component<Props, State> {
   /**
    *  Handles the svg arrow click
    * */
-  handleArrowClick = (sourceId, targetId) => {
+  handleArrowClick = (sourceId: string, targetId: string) => {
     this.props.onArrowClick(sourceId, targetId);
   };
 
