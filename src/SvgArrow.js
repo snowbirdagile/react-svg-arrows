@@ -117,9 +117,7 @@ export function computeLabelDimensions(
 }
 
 export function handleClick(sourceId: string, targetId: string, onArrowClick: Function) {
-  if((onArrowClick !== undefined && sourceId) && targetId) {
-    onArrowClick(sourceId, targetId);
-  }
+  onArrowClick(sourceId, targetId);
 }
 
 
