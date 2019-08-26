@@ -132,6 +132,7 @@ export class ArrowContainer extends React.Component<Props, State> {
     });
 
     if (window) window.removeEventListener('resize', this.refreshScreen);
+    if (window) window.removeEventListener('click', this.handleOutSideClick);
   }
 
   handleOutSideClick = (e) => {
@@ -385,8 +386,8 @@ export class ArrowContainer extends React.Component<Props, State> {
         </div>
 
         <ul className="menu" id="react-svg-context-menu" style={menuStyles}>
-            <li className="menu-option"
-              onClick={this.handleContextMenuClick}>Switch Direction</li>
+          <li className="menu-option"
+            onClick={this.handleContextMenuClick}>Switch Direction</li>
         </ul>
       </ArrowContainerContextProvider>
     );
