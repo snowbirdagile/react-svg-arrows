@@ -99,10 +99,9 @@ class FirstExample extends Component {
         });
     }
     render() {
-         debugger
         return (
             <div style={{height: '600px', margin: '50px'}} >
-                <ArrowContainer strokeColor="red" onArrowClick={this.handleArrowClick}>
+                <ArrowContainer strokeColor="red" strokeWidth="3"  onArrowClick={this.handleArrowClick}>
                     <div style={{display: 'flex', justifyContent: 'space-around'}} id='parent'>
                         {this.renderLanes()}
                     </div>

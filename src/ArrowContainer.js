@@ -3,6 +3,7 @@
 import React from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import Point from './Point';
+import "./ArrowContainer.css"
 
 import SvgArrow from './SvgArrow';
 
@@ -93,6 +94,11 @@ export class ArrowContainer extends React.Component<Props, State> {
       sourceToTargetsMap: {},
       observer,
       parent: null,
+      display: "none",
+      top: 0,
+      left: 0,
+      sourceId: null,
+      targetId: null
     };
 
     const arrowMarkerRandomNumber = Math.random()
@@ -111,12 +117,10 @@ export class ArrowContainer extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    console.log("component did mount");
     if (window) window.addEventListener('resize', this.refreshScreen);
+    if (window) window.addEventListener('click', this.handleOutSideClick);
 
-    console.log("props", this.props);
     if (window) window.addEventListener('scroll', () => {
-      console.log("scrolled");
     });
   }
 
@@ -129,6 +133,21 @@ export class ArrowContainer extends React.Component<Props, State> {
 
     if (window) window.removeEventListener('resize', this.refreshScreen);
   }
+
+  handleOutSideClick = (e) => {
+    if(e.target.id !== "react-svg-context-menu") {
+      this.setState({
+        display: "none",
+        sourceId: null,
+        targetId: null
+      });
+    }
+  };
+
+  handleContextMenuClick = (e) => {
+    const {sourceId,targetId}  = this.state;
+    this.props.onArrowClick(sourceId, targetId);
+  };
 
   refreshScreen = (): void => {
     this.setState({ ...this.state });
@@ -274,10 +293,14 @@ export class ArrowContainer extends React.Component<Props, State> {
   /**
    *  Handles the svg arrow click
    * */
-  handleArrowClick = (sourceId: string, targetId: string) => {
-    if(this.props.onArrowClick) {
-      this.props.onArrowClick(sourceId, targetId);
-    }
+  handleArrowClick = (e,sourceId: string, targetId: string) => {
+      this.setState({
+        display: "block",
+        top: e.pageX,
+        left: e.pageY,
+        sourceId,
+        targetId
+      });
   };
 
   /** Generates an id for an arrow marker
@@ -333,6 +356,13 @@ export class ArrowContainer extends React.Component<Props, State> {
 
   render() {
     const SvgArrows = this.computeArrows();
+    const {display, top, left} = this.state;
+    const menuStyles = {
+          display,
+          top,
+          left,
+          position: "absolute"
+    };
     return (
       <ArrowContainerContextProvider
         value={{
@@ -353,6 +383,11 @@ export class ArrowContainer extends React.Component<Props, State> {
 
           <div style={{ height: '100%' }} ref={this.storeParent}>{this.props.children}</div>
         </div>
+
+        <ul className="menu" id="react-svg-context-menu" style={menuStyles}>
+            <li className="menu-option"
+              onClick={this.handleContextMenuClick}>Switch Direction</li>
+        </ul>
       </ArrowContainerContextProvider>
     );
   }
