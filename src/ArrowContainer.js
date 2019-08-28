@@ -297,8 +297,8 @@ export class ArrowContainer extends React.Component<Props, State> {
   handleArrowClick = (e,sourceId: string, targetId: string) => {
       this.setState({
         display: "block",
-        top: e.pageX,
-        left: e.pageY,
+        top: e.pageY,
+        left: e.pageX,
         sourceId,
         targetId
       });
