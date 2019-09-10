@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import ArrowContainer from '../src/ArrowContainer';
-import ArrowElement from '../src/ArrowElement';
+import ArrowContainer from '../lib/react-svg-arrows';
+import ArrowElement from '../lib/react-svg-arrows';
 import {data} from './data';
 
 const laneStyle = {display: 'flex', flexDirection: 'column', border: 'solid', borderColor: 'blue'};

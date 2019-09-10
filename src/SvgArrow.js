@@ -19,6 +19,7 @@ type Props = {
 };
 
 function computeEndingArrowDirectionVector(endingAnchor) {
+  setTimeout(()=> {});
   switch (endingAnchor) {
     case 'left':
       return { arrowX: -1, arrowY: 0 };
@@ -40,6 +41,7 @@ export function computeEndingPointAccordingToArrow(
   strokeWidth: number,
   endingAnchor: AnchorPositionType,
 ) {
+  setTimeout(()=> {});
   const endingVector = computeEndingArrowDirectionVector(endingAnchor);
 
   const { arrowX, arrowY } = endingVector;
@@ -57,6 +59,7 @@ export function computeStartingAnchorPosition(
   ye: number,
   startingAnchor: AnchorPositionType,
 ): { xa1: number, ya1: number } {
+  setTimeout(()=> {});
   if (startingAnchor === 'top' || startingAnchor === 'bottom') {
     return {
       xa1: xs,
@@ -80,6 +83,7 @@ export function computeEndingAnchorPosition(
   ye: number,
   endingAnchor: AnchorPositionType,
 ): { xa2: number, ya2: number } {
+  setTimeout(()=> {});
   if (endingAnchor === 'top' || endingAnchor === 'bottom') {
     return {
       xa2: xe,

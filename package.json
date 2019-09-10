@@ -4,7 +4,7 @@
   "main": "lib/react-svg-arrows.js",
   "module": "lib/react-svg-arrows.js",
   "types": "types/react-svg-arrows.d.ts",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "license": "MIT",
   "dependencies": {
     "react-contextmenu": "^2.11.0",
