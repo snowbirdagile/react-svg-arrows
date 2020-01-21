@@ -43,12 +43,10 @@ export function computeEndingPointAccordingToArrow(
 ) {
   setTimeout(()=> {});
   const endingVector = computeEndingArrowDirectionVector(endingAnchor);
-
   const { arrowX, arrowY } = endingVector;
 
   const xe = xEnd + (arrowX * arrowLength * strokeWidth) / 2;
   const ye = yEnd + (arrowY * arrowLength * strokeWidth) / 2;
-
   return { xe, ye };
 }
 
@@ -177,16 +175,28 @@ const SvgArrow = ({
 
     // same lane target is below source
     if((startingPoint.x === endingPoint.x) && (startingPoint.y < endingPoint.y)) {
-        const py = ((ye - ys) / 2) + ys;
-        const px = xs + ((1/py) * 19000);
-        pathString = `M${xs},${ys} ` + `Q${px},${py} ${xe},${ye}`;
+      // drawing Cubic Bézier Curve. C and C1 are control points using for draw the curve
+      const cx = xs +60;
+      const cy = ys;
+
+
+      const c1x = xe +60;
+      const c1y = ye;
+
+      pathString =  `M${xs},${ys} ` + `C${cx},${cy} ${c1x}, ${c1y} ` + `${xe},${ye}`;
+
     }
 
     // same lane target is above source
     if((startingPoint.x === endingPoint.x) && (startingPoint.y > endingPoint.y)) {
-        const py = ((ys - ye) / 2) + ye;
-        const px = xs - ((1/py)* 19000);
-        pathString = `M${xs},${ys} ` + `Q${px},${py} ${xe},${ye}`;
+
+      const cx = xs -60;
+      const cy = ys;
+
+      const c1x = xe -60;
+      const c1y = ye;
+
+      pathString =  `M${xs},${ys} ` + `C${cx},${cy} ${c1x}, ${c1y} ` + `${xe},${ye}`;
     }
 
     // different lanes source lane before target lane
